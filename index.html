@@ -2,24 +2,26 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Redirecting...</title>
-</head>
-<body>
+    <title>生成TikTok搜索二维码</title>
     <script>
-        function autoNavigateToVideo() {
-            const searchUrl = "https://www.tiktok.com/search?q=BehindTheScenes";
-            const targetVideoUrl = "https://www.tiktok.com/@matthewmorocho3/video/7396887063204957486";
+        function generateRedirect() {
+            const keyword = document.getElementById("keyword").value;
+            const videoId = document.getElementById("videoId").value;
+            const username = document.getElementById("username").value;
 
-            // 跳转到搜索页面
-            window.location.href = searchUrl;
+            const searchUrl = `https://www.tiktok.com/search?q=${encodeURIComponent(keyword)}`;
+            const targetVideoUrl = `https://www.tiktok.com/@${username}/video/${videoId}`;
 
-            // 等待3秒后跳转到目标视频页面
-            setTimeout(() => {
-                window.location.href = targetVideoUrl;
-            }, 5000); // 等待5秒以确保搜索页面加载
-        }
+            const scriptContent = `
+                <script>
+                    function autoNavigateToVideo() {
+                        const searchUrl = "${searchUrl}";
+                        const targetVideoUrl = "${targetVideoUrl}";
 
-        window.onload = autoNavigateToVideo;
-    </script>
-</body>
-</html>
+                        window.location.href = searchUrl;
+                        setTimeout(() => {
+                            window.location.href = targetVideoUrl;
+                        }, 5000);
+                    }
+
+                    window.onload = autoNavigate
